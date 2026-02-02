@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore interactive data visualizations built with Vega and Vega-Lite">
+    <title>Visualizations | Whisker Plots</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'whisker-blue': '#2563eb',
+                        'whisker-purple': '#7c3aed',
+                        'whisker-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation (injected) -->
+    <div id="navigation"></div>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="mb-12">
+                <h1 class="section-heading">Data Visualizations</h1>
+                <p class="section-description">
+                    Interactive charts and graphs powered by Vega and Vega-Lite. Explore data through beautiful, responsive visualizations that tell compelling stories.
+                </p>
+            </div>
+
+            <!-- Visualizations Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Vega Demo Card -->
+                <a href="/visualizations/vega-demo.html" class="card group no-underline">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-whisker-blue to-whisker-purple rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-whisker-blue transition-colors">
+                        Vega Demo Visualization
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        An interactive scatter plot demonstrating Vega's capabilities with sample data. Includes tooltips and dynamic filtering.
+                    </p>
+                    <span class="text-whisker-blue font-semibold group-hover:text-blue-700 transition-colors">
+                        View Demo &rarr;
+                    </span>
+                </a>
+
+                <!-- Placeholder Card 1 -->
+                <div class="card opacity-60 cursor-not-allowed">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">
+                        More Coming Soon
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        Additional visualizations will be added here. Check back soon for more interactive data explorations.
+                    </p>
+                </div>
+
+                <!-- Placeholder Card 2 -->
+                <div class="card opacity-60 cursor-not-allowed">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">
+                        More Coming Soon
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        Additional visualizations will be added here. Check back soon for more interactive data explorations.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="mt-12 bg-blue-50 border-l-4 border-whisker-blue p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">About These Visualizations</h3>
+                <p class="text-gray-700">
+                    All visualizations on this site are built with <a href="https://vega.github.io/vega/" class="text-whisker-blue font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Vega</a> and <a href="https://vega.github.io/vega-lite/" class="text-whisker-blue font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Vega-Lite</a>, powerful open-source visualization grammars. They're fully interactive, responsive, and designed to help you explore data in meaningful ways.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (injected) -->
+    <div id="footer"></div>
+
+    <!-- Shared components -->
+    <script src="/js/shared/navigation.js"></script>
+    <script src="/js/shared/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Whisker Plots - Interactive data visualizations, calculators, and health insights">
+    <title>Whisker Plots | Data Visualizations & Calculators</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'whisker-blue': '#2563eb',
+                        'whisker-purple': '#7c3aed',
+                        'whisker-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation (injected) -->
+    <div id="navigation"></div>
+
+    <!-- Main content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 text-white py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        Whisker Plots
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-200 mb-8">
+                        Interactive data visualizations, calculators, and insights for curious minds
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/visualizations/index.html"
+                           class="bg-whisker-blue hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+                            Explore Visualizations
+                        </a>
+                        <a href="/calculators/index.html"
+                           class="bg-white hover:bg-gray-100 text-slate-800 font-semibold py-3 px-8 rounded-lg transition-colors">
+                            Try Calculators
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="container mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Visualizations Card -->
+                <div class="card">
+                    <div class="text-whisker-blue mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 text-gray-800">Data Visualizations</h2>
+                    <p class="text-gray-600 mb-4">
+                        Interactive charts and graphs powered by Vega and Vega-Lite. Explore data through beautiful, responsive visualizations.
+                    </p>
+                    <a href="/visualizations/index.html" class="text-whisker-blue font-semibold hover:text-blue-700 transition-colors">
+                        View Visualizations &rarr;
+                    </a>
+                </div>
+
+                <!-- Calculators Card -->
+                <div class="card">
+                    <div class="text-whisker-purple mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 text-gray-800">Interactive Calculators</h2>
+                    <p class="text-gray-600 mb-4">
+                        Practical calculators for everyday questions. Get instant results with visual feedback and clear explanations.
+                    </p>
+                    <a href="/calculators/index.html" class="text-whisker-purple font-semibold hover:text-purple-700 transition-colors">
+                        Try Calculators &rarr;
+                    </a>
+                </div>
+
+                <!-- Health Insights Card -->
+                <div class="card">
+                    <div class="text-whisker-teal mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 text-gray-800">Health Insights</h2>
+                    <p class="text-gray-600 mb-4">
+                        Health-related visualizations with simple explanations. Understand the data behind wellness and lifestyle choices.
+                    </p>
+                    <a href="/health/index.html" class="text-whisker-teal font-semibold hover:text-teal-700 transition-colors">
+                        Explore Health Data &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">About Whisker Plots</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        Whisker Plots is a collection of interactive data visualizations and calculators designed to make complex information accessible and engaging. Whether you're exploring data trends, calculating daily metrics, or learning about health insights, we provide tools that are both informative and easy to use.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        All visualizations are built with Vega and Vega-Lite, open-source tools for creating rich, interactive graphics. The calculators provide real-time results with visual feedback to help you understand the numbers.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (injected) -->
+    <div id="footer"></div>
+
+    <!-- Shared components -->
+    <script src="/js/shared/navigation.js"></script>
+    <script src="/js/shared/footer.js"></script>
+</body>
+</html>

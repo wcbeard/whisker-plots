@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Vega visualization showing the relationship between exercise and sleep quality">
+    <title>Exercise vs Sleep Quality | Whisker Plots</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'whisker-blue': '#2563eb',
+                        'whisker-purple': '#7c3aed',
+                        'whisker-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- Vega Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation (injected) -->
+    <div id="navigation"></div>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header -->
+            <div class="mb-8">
+                <nav class="text-sm text-gray-600 mb-4">
+                    <a href="/visualizations/index.html" class="hover:text-whisker-blue">Visualizations</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-800">Exercise vs Sleep Quality</span>
+                </nav>
+                <h1 class="text-4xl font-bold mb-4 text-gray-800">Exercise vs Sleep Quality</h1>
+                <p class="text-xl text-gray-600">
+                    An interactive visualization exploring the relationship between weekly exercise hours and sleep quality ratings across different age groups.
+                </p>
+            </div>
+
+            <!-- Visualization Container -->
+            <div class="vega-container">
+                <div id="loading" class="loading">Loading visualization</div>
+                <div id="vis"></div>
+            </div>
+
+            <!-- Explanation Section -->
+            <div class="bg-white rounded-lg shadow p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">What This Shows</h2>
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        This scatter plot visualizes sample data showing how regular exercise might correlate with sleep quality across three age groups. Each point represents a data observation, with:
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li><strong>X-axis:</strong> Weekly exercise hours (0-9 hours)</li>
+                        <li><strong>Y-axis:</strong> Sleep quality rating (1-10 scale)</li>
+                        <li><strong>Color:</strong> Age group (18-30, 31-50, 50+)</li>
+                    </ul>
+                    <p>
+                        <strong>Key Insights:</strong>
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>Sleep quality tends to improve with moderate exercise (3-6 hours per week)</li>
+                        <li>There appears to be an optimal range around 5-6 hours per week where sleep quality peaks</li>
+                        <li>Excessive exercise (7+ hours/week) may correlate with slightly lower sleep quality</li>
+                        <li>The pattern is relatively consistent across age groups</li>
+                    </ul>
+                    <p class="text-sm text-gray-600 italic mt-4">
+                        Note: This is sample data for demonstration purposes only and should not be used for medical or health decisions.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Features -->
+            <div class="bg-blue-50 border-l-4 border-whisker-blue p-6 rounded-lg mb-8">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Interactive Features</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 ml-4">
+                    <li><strong>Hover:</strong> Hover over any point to see detailed values in a tooltip</li>
+                    <li><strong>Legend:</strong> Click age groups in the legend to filter the data</li>
+                    <li><strong>Export:</strong> Use the menu in the top-right of the chart to export as PNG or SVG</li>
+                    <li><strong>View Spec:</strong> Click to view the Vega-Lite specification that powers this visualization</li>
+                </ul>
+            </div>
+
+            <!-- Spec Details -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Vega-Lite Specification</h3>
+                    <a href="/data/vega-specs/demo-spec.json"
+                       target="_blank"
+                       class="text-whisker-blue font-semibold hover:text-blue-700 transition-colors">
+                        View JSON &rarr;
+                    </a>
+                </div>
+                <p class="text-gray-600 mb-4">
+                    This visualization is built with Vega-Lite, a high-level grammar for creating interactive visualizations. The entire chart is defined in a simple JSON specification.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Vega-Lite v5</span>
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Scatter Plot</span>
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Interactive</span>
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Responsive</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (injected) -->
+    <div id="footer"></div>
+
+    <!-- Shared components -->
+    <script src="/js/shared/navigation.js"></script>
+    <script src="/js/shared/footer.js"></script>
+
+    <!-- Vega Rendering Script -->
+    <script type="module">
+        async function renderVisualization() {
+            const loadingEl = document.getElementById('loading');
+            const visEl = document.getElementById('vis');
+
+            try {
+                // Fetch the Vega-Lite spec
+                const response = await fetch('/data/vega-specs/demo-spec.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const spec = await response.json();
+
+                // Render the visualization
+                await vegaEmbed('#vis', spec, {
+                    actions: {
+                        export: true,
+                        source: true,
+                        compiled: false,
+                        editor: true
+                    },
+                    theme: 'latimes'
+                });
+
+                // Hide loading message
+                loadingEl.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading visualization:', error);
+                loadingEl.textContent = 'Error loading visualization. Please check the console for details.';
+                loadingEl.classList.add('text-red-600');
+            }
+        }
+
+        // Render when page loads
+        renderVisualization();
+    </script>
+</body>
+</html>

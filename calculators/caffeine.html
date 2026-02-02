@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visualize how caffeine levels change throughout your day based on your coffee intake">
+    <title>Caffeine Calculator | Whisker Plots</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'whisker-blue': '#2563eb',
+                        'whisker-purple': '#7c3aed',
+                        'whisker-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <style>
+        /* Slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #7c3aed;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+            transition: transform 0.15s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #7c3aed;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(124, 58, 237, 0.4);
+        }
+
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: #d1d5db;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+        .toggle-switch.active {
+            background: #7c3aed;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+
+        /* Dose list transitions */
+        .dose-item {
+            transition: all 0.2s ease;
+        }
+        .dose-item:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* Chart container */
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 420px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation (injected) -->
+    <div id="navigation"></div>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="mb-8">
+                <nav class="text-sm text-gray-600 mb-4">
+                    <a href="/calculators/index.html" class="hover:text-whisker-blue">Calculators</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-gray-800">Caffeine Calculator</span>
+                </nav>
+                <h1 class="text-4xl font-bold mb-4 text-gray-800">Caffeine Calculator</h1>
+                <p class="text-xl text-gray-600">
+                    Visualize how caffeine levels change throughout your day. Add your doses and see the decay curve in real time.
+                </p>
+            </div>
+
+            <!-- Controls Card -->
+            <div class="bg-white rounded-lg shadow p-6 mb-6">
+                <!-- Half-life Slider -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-sm font-semibold text-gray-700">
+                            Caffeine Half-Life
+                        </label>
+                        <span id="half-life-value" class="text-sm font-bold text-whisker-purple">5.0 hours</span>
+                    </div>
+                    <input type="range" id="half-life-slider"
+                           min="2" max="8" step="0.5" value="5"
+                           class="w-full">
+                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                        <span>2 hrs (fast)</span>
+                        <span>5 hrs (avg)</span>
+                        <span>8 hrs (slow)</span>
+                    </div>
+                </div>
+
+                <!-- Advanced Toggle -->
+                <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200">
+                    <div id="advanced-toggle" class="toggle-switch" role="switch" aria-checked="false" tabindex="0"></div>
+                    <div>
+                        <span class="text-sm font-semibold text-gray-700">Advanced mode</span>
+                        <span class="text-xs text-gray-500 ml-1">(milligrams)</span>
+                    </div>
+                </div>
+
+                <!-- Add Dose -->
+                <h2 class="text-lg font-bold mb-4 text-gray-800">Add a Dose</h2>
+                <div class="flex flex-wrap gap-3 items-end">
+                    <!-- Hour input -->
+                    <div class="flex-1 min-w-[100px]">
+                        <label for="dose-hour" class="block text-sm font-medium text-gray-600 mb-1">Hour(s) — e.g. 7 or 7,12,15</label>
+                        <input type="text" id="dose-hour"
+                               value="7" placeholder="7 or 7,12,15"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-whisker-purple focus:border-transparent text-center">
+                    </div>
+
+                    <!-- Amount input (cups mode) -->
+                    <div id="cups-input-group" class="flex-1 min-w-[120px]">
+                        <label for="dose-cups" class="block text-sm font-medium text-gray-600 mb-1">Cups of coffee</label>
+                        <input type="number" id="dose-cups"
+                               min="0.25" max="10" step="0.25" value="1"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-whisker-purple focus:border-transparent text-center">
+                    </div>
+
+                    <!-- Amount input (mg mode, hidden by default) -->
+                    <div id="mg-input-group" class="flex-1 min-w-[120px] hidden">
+                        <label for="dose-mg" class="block text-sm font-medium text-gray-600 mb-1">Milligrams</label>
+                        <input type="number" id="dose-mg"
+                               min="1" max="1000" step="1" value="95"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-whisker-purple focus:border-transparent text-center">
+                    </div>
+
+                    <!-- Add button -->
+                    <button id="add-dose-btn"
+                            class="bg-whisker-purple hover:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors whitespace-nowrap">
+                        + Add Dose
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dose List -->
+            <div id="dose-list-card" class="bg-white rounded-lg shadow p-6 mb-6 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800">Your Doses</h2>
+                    <button id="clear-all-btn"
+                            class="text-sm text-gray-500 hover:text-red-600 font-medium transition-colors">
+                        Clear all
+                    </button>
+                </div>
+                <div id="dose-list" class="space-y-2"></div>
+            </div>
+
+            <!-- Chart Card -->
+            <div id="chart-card" class="bg-white rounded-lg shadow p-6 mb-6 hidden">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Caffeine Levels Over 24 Hours</h2>
+                <div class="chart-wrapper">
+                    <canvas id="caffeine-chart"></canvas>
+                </div>
+                <div id="chart-legend" class="mt-4 flex flex-wrap gap-4 text-sm text-gray-600"></div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="bg-purple-50 border-l-4 border-whisker-purple p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-3 text-gray-800">About Caffeine</h3>
+                <div class="space-y-3 text-gray-700">
+                    <p>
+                        The FDA recommends that healthy adults limit caffeine intake to <strong>400 mg per day</strong>, roughly equivalent to four 8-ounce cups of brewed coffee.
+                    </p>
+                    <p>
+                        <strong>Caffeine metabolism varies by person</strong> based on genetics, age, weight, and tolerance. The half-life of caffeine is typically 2-8 hours, with an average of about 5 hours. Use the slider above to adjust.
+                    </p>
+                    <p>
+                        One standard cup of drip coffee contains approximately <strong>95 mg</strong> of caffeine.
+                    </p>
+                    <p class="text-sm text-gray-600 italic">
+                        Note: This calculator is for informational purposes only. Consult with a healthcare professional about your caffeine consumption.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (injected) -->
+    <div id="footer"></div>
+
+    <!-- Shared components -->
+    <script src="/js/shared/navigation.js"></script>
+    <script src="/js/shared/footer.js"></script>
+
+    <!-- Calculator Logic -->
+    <script src="/js/calculators/caffeine.js"></script>
+</body>
+</html>

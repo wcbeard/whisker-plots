@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Exercise vs Sleep Quality",
+    "fontSize": 20,
+    "font": "Inter",
+    "anchor": "start"
+  },
+  "description": "An interactive scatter plot showing the relationship between weekly exercise hours and sleep quality rating",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "values": [
+      {"exercise_hours": 0, "sleep_quality": 4.2, "age_group": "18-30"},
+      {"exercise_hours": 1, "sleep_quality": 5.1, "age_group": "18-30"},
+      {"exercise_hours": 2, "sleep_quality": 6.3, "age_group": "18-30"},
+      {"exercise_hours": 3, "sleep_quality": 7.5, "age_group": "18-30"},
+      {"exercise_hours": 4, "sleep_quality": 8.2, "age_group": "18-30"},
+      {"exercise_hours": 5, "sleep_quality": 8.7, "age_group": "18-30"},
+      {"exercise_hours": 6, "sleep_quality": 8.9, "age_group": "18-30"},
+      {"exercise_hours": 7, "sleep_quality": 8.5, "age_group": "18-30"},
+      {"exercise_hours": 8, "sleep_quality": 7.8, "age_group": "18-30"},
+      {"exercise_hours": 0.5, "sleep_quality": 4.5, "age_group": "31-50"},
+      {"exercise_hours": 1.5, "sleep_quality": 5.5, "age_group": "31-50"},
+      {"exercise_hours": 2.5, "sleep_quality": 6.8, "age_group": "31-50"},
+      {"exercise_hours": 3.5, "sleep_quality": 7.8, "age_group": "31-50"},
+      {"exercise_hours": 4.5, "sleep_quality": 8.5, "age_group": "31-50"},
+      {"exercise_hours": 5.5, "sleep_quality": 9.0, "age_group": "31-50"},
+      {"exercise_hours": 6.5, "sleep_quality": 8.8, "age_group": "31-50"},
+      {"exercise_hours": 7.5, "sleep_quality": 8.2, "age_group": "31-50"},
+      {"exercise_hours": 1, "sleep_quality": 5.3, "age_group": "50+"},
+      {"exercise_hours": 2, "sleep_quality": 6.5, "age_group": "50+"},
+      {"exercise_hours": 3, "sleep_quality": 7.7, "age_group": "50+"},
+      {"exercise_hours": 4, "sleep_quality": 8.4, "age_group": "50+"},
+      {"exercise_hours": 5, "sleep_quality": 8.9, "age_group": "50+"},
+      {"exercise_hours": 6, "sleep_quality": 8.6, "age_group": "50+"},
+      {"exercise_hours": 7, "sleep_quality": 8.0, "age_group": "50+"}
+    ]
+  },
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 100
+  },
+  "encoding": {
+    "x": {
+      "field": "exercise_hours",
+      "type": "quantitative",
+      "title": "Weekly Exercise Hours",
+      "scale": {"domain": [0, 9]}
+    },
+    "y": {
+      "field": "sleep_quality",
+      "type": "quantitative",
+      "title": "Sleep Quality Rating (1-10)",
+      "scale": {"domain": [0, 10]}
+    },
+    "color": {
+      "field": "age_group",
+      "type": "nominal",
+      "title": "Age Group",
+      "scale": {
+        "domain": ["18-30", "31-50", "50+"],
+        "range": ["#2563eb", "#7c3aed", "#14b8a6"]
+      }
+    },
+    "tooltip": [
+      {"field": "exercise_hours", "type": "quantitative", "title": "Exercise (hours/week)"},
+      {"field": "sleep_quality", "type": "quantitative", "title": "Sleep Quality"},
+      {"field": "age_group", "type": "nominal", "title": "Age Group"}
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Inter"
+    },
+    "legend": {
+      "labelFont": "Inter",
+      "titleFont": "Inter"
+    },
+    "title": {
+      "font": "Inter"
+    }
+  }
+}

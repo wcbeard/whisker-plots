@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive calculators for everyday questions with instant visual results">
+    <title>Calculators | Whisker Plots</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'whisker-blue': '#2563eb',
+                        'whisker-purple': '#7c3aed',
+                        'whisker-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation (injected) -->
+    <div id="navigation"></div>
+
+    <!-- Main content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="mb-12">
+                <h1 class="section-heading">Interactive Calculators</h1>
+                <p class="section-description">
+                    Practical calculators that provide instant results with visual feedback and clear explanations. Get answers to everyday questions quickly and easily.
+                </p>
+            </div>
+
+            <!-- Calculators Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Caffeine Calculator Card -->
+                <a href="/calculators/caffeine.html" class="card group no-underline">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-whisker-purple to-pink-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-whisker-purple transition-colors">
+                        Caffeine Calculator
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        Calculate your total caffeine intake from coffee, tea, and energy drinks. See how it compares to daily limits and when it will metabolize.
+                    </p>
+                    <span class="text-whisker-purple font-semibold group-hover:text-purple-700 transition-colors">
+                        Try Calculator &rarr;
+                    </span>
+                </a>
+
+                <!-- Placeholder Card 1 -->
+                <div class="card opacity-60 cursor-not-allowed">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">
+                        More Coming Soon
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        Additional calculators will be added here. Suggest new calculators on GitHub!
+                    </p>
+                </div>
+
+                <!-- Placeholder Card 2 -->
+                <div class="card opacity-60 cursor-not-allowed">
+                    <div class="mb-4">
+                        <div class="w-full h-40 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">
+                        More Coming Soon
+                    </h3>
+                    <p class="text-gray-600 mb-3">
+                        Additional calculators will be added here. Suggest new calculators on GitHub!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="mt-12 bg-purple-50 border-l-4 border-whisker-purple p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">About These Calculators</h3>
+                <p class="text-gray-700">
+                    Our calculators provide real-time results as you type, with visual feedback to help you understand the numbers. All calculations are performed locally in your browser—no data is sent to any server.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (injected) -->
+    <div id="footer"></div>
+
+    <!-- Shared components -->
+    <script src="/js/shared/navigation.js"></script>
+    <script src="/js/shared/footer.js"></script>
+</body>
+</html>
