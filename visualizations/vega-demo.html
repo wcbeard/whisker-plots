@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="../css/custom.css">
 
     <!-- Vega Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -45,7 +45,7 @@
             <!-- Header -->
             <div class="mb-8">
                 <nav class="text-sm text-gray-600 mb-4">
-                    <a href="/visualizations/index.html" class="hover:text-whisker-blue">Visualizations</a>
+                    <a href="./index.html" class="hover:text-whisker-blue">Visualizations</a>
                     <span class="mx-2">/</span>
                     <span class="text-gray-800">Exercise vs Sleep Quality</span>
                 </nav>
@@ -103,7 +103,7 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-xl font-bold text-gray-800">Vega-Lite Specification</h3>
-                    <a href="/data/vega-specs/demo-spec.json"
+                    <a href="../data/vega-specs/demo-spec.json"
                        target="_blank"
                        class="text-whisker-blue font-semibold hover:text-blue-700 transition-colors">
                         View JSON &rarr;
@@ -126,8 +126,8 @@
     <div id="footer"></div>
 
     <!-- Shared components -->
-    <script src="/js/shared/navigation.js"></script>
-    <script src="/js/shared/footer.js"></script>
+    <script src="../js/shared/navigation.js"></script>
+    <script src="../js/shared/footer.js"></script>
 
     <!-- Vega Rendering Script -->
     <script type="module">
@@ -137,7 +137,7 @@
 
             try {
                 // Fetch the Vega-Lite spec
-                const response = await fetch('/data/vega-specs/demo-spec.json');
+                const response = await fetch('../data/vega-specs/demo-spec.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
