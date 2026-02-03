@@ -1,19 +1,47 @@
 // Navigation component for Whisker Plots
-const navigationHTML = `
+
+// Calculate the base path to root based on current page location
+function getBasePath() {
+  const path = window.location.pathname;
+  // Count directory depth (excluding the filename)
+  const segments = path.split('/').filter(s => s.length > 0);
+  // If we're at root or just have index.html, no prefix needed
+  // If we're in a subdirectory (e.g., /whisker-plots/calculators/caffeine.html), go up
+  
+  // For GitHub Pages, we need to handle the repo name in the path
+  // Path could be /whisker-plots/calculators/caffeine.html or /calculators/caffeine.html
+  
+  // Find how many directories deep we are from the HTML file
+  let depth = 0;
+  for (let i = segments.length - 1; i >= 0; i--) {
+    if (segments[i].endsWith('.html')) continue;
+    // Check if this is a known subdirectory
+    if (['calculators', 'visualizations', 'health'].includes(segments[i])) {
+      depth = 1;
+      break;
+    }
+  }
+  
+  return depth > 0 ? '../' : './';
+}
+
+function getNavigationHTML() {
+  const base = getBasePath();
+  return `
   <nav class="bg-slate-800 text-white shadow-lg">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
         <!-- Logo/Site Title -->
-        <a href="/index.html" class="text-2xl font-bold text-white hover:text-whisker-blue transition-colors">
+        <a href="${base}index.html" class="text-2xl font-bold text-white hover:text-whisker-blue transition-colors">
           Whisker Plots
         </a>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex space-x-8">
-          <a href="/index.html" class="nav-link hover:text-whisker-blue transition-colors">Home</a>
-          <a href="/visualizations/index.html" class="nav-link hover:text-whisker-blue transition-colors">Visualizations</a>
-          <a href="/calculators/index.html" class="nav-link hover:text-whisker-blue transition-colors">Calculators</a>
-          <a href="/health/index.html" class="nav-link hover:text-whisker-blue transition-colors">Health</a>
+          <a href="${base}index.html" class="nav-link hover:text-whisker-blue transition-colors">Home</a>
+          <a href="${base}visualizations/index.html" class="nav-link hover:text-whisker-blue transition-colors">Visualizations</a>
+          <a href="${base}calculators/index.html" class="nav-link hover:text-whisker-blue transition-colors">Calculators</a>
+          <a href="${base}health/index.html" class="nav-link hover:text-whisker-blue transition-colors">Health</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -27,15 +55,16 @@ const navigationHTML = `
       <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden md:hidden pb-4">
         <div class="flex flex-col space-y-2">
-          <a href="/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Home</a>
-          <a href="/visualizations/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Visualizations</a>
-          <a href="/calculators/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Calculators</a>
-          <a href="/health/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Health</a>
+          <a href="${base}index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Home</a>
+          <a href="${base}visualizations/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Visualizations</a>
+          <a href="${base}calculators/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Calculators</a>
+          <a href="${base}health/index.html" class="nav-link-mobile block py-2 px-4 hover:bg-slate-700 rounded transition-colors">Health</a>
         </div>
       </div>
     </div>
   </nav>
 `;
+}
 
 // Initialize mobile menu toggle
 function initializeMobileMenu() {
@@ -66,7 +95,7 @@ function highlightActivePage() {
 document.addEventListener('DOMContentLoaded', () => {
   const navContainer = document.getElementById('navigation');
   if (navContainer) {
-    navContainer.innerHTML = navigationHTML;
+    navContainer.innerHTML = getNavigationHTML();
     initializeMobileMenu();
     highlightActivePage();
   }
