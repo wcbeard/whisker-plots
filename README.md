@@ -11,7 +11,7 @@ Whisker Plots is a collection of interactive web-based tools for exploring data 
 
 ## Live Site
 
-Visit the live site at: `https://wcbeard.github.io/whisker-plots/`
+Visit the live site at: https://wcbeard.github.io/whisker-plots/
 
 ## Features
 

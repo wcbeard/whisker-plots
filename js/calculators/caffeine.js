@@ -261,13 +261,15 @@ function renderChart() {
     return;
   }
 
+  const isMobile = window.innerWidth < 640;
+
   chart = new Chart(chartCanvas, {
     type: 'line',
     data: { datasets },
     options: {
       responsive: true,
       maintainAspectRatio: true,
-      aspectRatio: 2,
+      aspectRatio: isMobile ? 1 : 2,
       interaction: {
         mode: 'index',
         intersect: false,
